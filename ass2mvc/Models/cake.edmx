@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="caketradeModel.Store" Alias="Self" Provider="System.Data.SqlServerCe.4.0" ProviderManifestToken="4.0" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="caketradeModelStoreContainer">
+          <EntitySet Name="Cake" EntityType="caketradeModel.Store.Cake" store:Type="Tables" />
+          <EntitySet Name="Userinfo" EntityType="caketradeModel.Store.Userinfo" store:Type="Tables" />
+          <AssociationSet Name="user2cake" Association="caketradeModel.Store.user2cake">
+            <End Role="Cake" EntitySet="Cake" />
+            <End Role="Userinfo" EntitySet="Userinfo" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Cake">
+          <Key>
+            <PropertyRef Name="CakeID" />
+          </Key>
+          <Property Name="CakeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CakeName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Time" Type="int" />
+          <Property Name="Price" Type="float" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Userinfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CakeID" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Mailbox" Type="nvarchar" MaxLength="100" />
+          <Property Name="Profession" Type="nvarchar" MaxLength="20" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="10" />
+          <Property Name="Age" Type="int" />
+          <Property Name="Password" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="user2cake">
+          <End Role="Cake" Type="caketradeModel.Store.Cake" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Userinfo" Type="caketradeModel.Store.Userinfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cake">
+              <PropertyRef Name="CakeID" />
+            </Principal>
+            <Dependent Role="Userinfo">
+              <PropertyRef Name="CakeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="caketradeModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="caketradeEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Cakes" EntityType="caketradeModel.Cake" />
+          <EntitySet Name="Userinfoes" EntityType="caketradeModel.Userinfo" />
+          <AssociationSet Name="user2cake" Association="caketradeModel.user2cake">
+            <End Role="Cake" EntitySet="Cakes" />
+            <End Role="Userinfo" EntitySet="Userinfoes" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Cake">
+          <Key>
+            <PropertyRef Name="CakeID" />
+          </Key>
+          <Property Name="CakeID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="CakeName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Time" Type="Int32" />
+          <Property Name="Price" Type="Double" />
+          <Property Name="Description" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Userinfoes" Relationship="caketradeModel.user2cake" FromRole="Cake" ToRole="Userinfo" />
+        </EntityType>
+        <EntityType Name="Userinfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="CakeID" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Mailbox" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Profession" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="Gender" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="Age" Type="Int32" />
+          <Property Name="Password" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Cake" Relationship="caketradeModel.user2cake" FromRole="Userinfo" ToRole="Cake" />
+        </EntityType>
+        <Association Name="user2cake">
+          <End Role="Cake" Type="caketradeModel.Cake" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Userinfo" Type="caketradeModel.Userinfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cake">
+              <PropertyRef Name="CakeID" />
+            </Principal>
+            <Dependent Role="Userinfo">
+              <PropertyRef Name="CakeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="caketradeModelStoreContainer" CdmEntityContainer="caketradeEntities">
+          <EntitySetMapping Name="Cakes">
+            <EntityTypeMapping TypeName="caketradeModel.Cake">
+              <MappingFragment StoreEntitySet="Cake">
+                <ScalarProperty Name="CakeID" ColumnName="CakeID" />
+                <ScalarProperty Name="CakeName" ColumnName="CakeName" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Userinfoes">
+            <EntityTypeMapping TypeName="caketradeModel.Userinfo">
+              <MappingFragment StoreEntitySet="Userinfo">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CakeID" ColumnName="CakeID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Mailbox" ColumnName="Mailbox" />
+                <ScalarProperty Name="Profession" ColumnName="Profession" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
