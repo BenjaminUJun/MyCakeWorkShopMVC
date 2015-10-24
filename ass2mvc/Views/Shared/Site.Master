@@ -1,0 +1,121 @@
+﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <title>
+        <asp:ContentPlaceHolder ID="TitleContent" runat="server" />
+    </title>
+        <meta name="viewport" content="width=device-width" />
+    <%: Scripts.Render("~/bundles/modernizr") %>
+    <link href="../../Content/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Armata|Julius+Sans+One' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="../../Content/css/craftyslide.css" />
+    <script src="../../Content/js/jquery.min.js" type="text/javascript"></script>
+    <link href="../../Content/rowstyle.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="wrap">
+        <div class="header">
+            <div class="logo">
+                <a href="/Home/Index">
+                    <img src="../../Images/logo.png" /></a>
+            </div>
+            <div class="contact-info">
+                <ul>
+                    <li>Order Delivery</li>
+                    <li>+81-186622-19952</li>
+                    <li>MON. - FRI., 8 AM- 8 PM EST </li>
+                </ul>
+            </div>
+            <div class="clear"></div>
+            <div id="divLog">
+                <section id="login">
+                    <%: Html.Partial("_LoginPartial") %>
+                </section>
+            </div>
+
+            <div class="top-nav">
+                <ul id="menu">
+                    <li class="active"><a href="/Home/Index">Home</a></li>
+                    <li><a href="/Home/About">Documentation</a></li>
+                    <li><a href="/Home/Contact">Contact</a></li>
+                    <li><a href="/Cake/Index">Cake</a></li>
+                    <li><a href="/Userinfo/Index">Users</a></li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="clear"></div>
+        <!--image-slider-->
+        <div id="slideshow">
+            <ul>
+                <li>
+                    <img src="../../Images/slide2.jpg" alt="" title="Delicious Strawberry Cake " />
+                </li>
+
+                <li>
+                    <img src="../../images/slide1.jpg" alt="" title="Delicious Milk Cake" />
+                </li>
+
+                <li>
+                    <img src="../../images/slide3.jpg" alt="" title="Chocolates with good taste" />
+                </li>
+
+                <li>
+                    <img src="../../images/slide2.jpg" alt="" title="Delicious Strawberry Cake " />
+                </li>
+
+                <li>
+                    <img src="../../images/slide1.jpg" alt="" title="Delicious Milk Cake " />
+                </li>
+            </ul>
+        </div>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+        <script src="../../Content/js/craftyslide.min.js"></script>
+
+        <script>
+            $("#slideshow").craftyslide();
+        </script>
+        <div class="clear"></div>
+        <!--End-image-slider-->
+        <!--banner-->
+
+        <div id="body">
+            <asp:ContentPlaceHolder ID="FeaturedContent" runat="server" />
+
+
+            <section class="content-wrapper main-content clear-fix">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+            </section>
+        </div>
+
+
+    </div>
+    <footer>
+        <div class="footer">
+            <div class="wrap">
+                <div class="footer-nav">
+                    <ul>
+                        <li><a href="/Home/Index">Home</a></li>
+                        <li><a href="/Home/About">Documentation</a></li>
+                        <li><a href="/Home/Contact">Contact</a></li>
+                        <li><a href="/Cake/Index">Cake</a></li>
+                        <li><a href="/Userinfo/Index">Users</a></li>
+                    </ul>
+                </div>
+                <div class="copy-right">
+                    <p>&copy; <%: DateTime.Now.Year %> - Yu & Pan ASP.NET MVC Application</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <%: Scripts.Render("~/bundles/jquery") %>
+    <%: Scripts.Render("~/bundles/jqueryui") %>
+    <%: Scripts.Render("~/Content/themes/base/css") %>
+    <%: Scripts.Render("~/bundles/jquerysf") %>
+    <asp:ContentPlaceHolder ID="ScriptsSection" runat="server" />
+</body>
+</html>
